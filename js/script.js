@@ -31,7 +31,7 @@ function loadData() {
             var article = articles[i];
             $nytElem.append('<li class="article"><a href="' + article.web_irl + '">' + article.headline.main + '</a><p>' + article.snippet + '</p></li>');
         }
-    });
+    }).error($nytHeaderElem.text('New York Times Articles About ' + city + " could not be loaded."));
 
     return false;
 };
