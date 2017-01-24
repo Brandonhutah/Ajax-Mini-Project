@@ -33,6 +33,16 @@ function loadData() {
         }
     }).error($nytHeaderElem.text('New York Times Articles About ' + city + " could not be loaded."));
 
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallBack';
+
+    $.ajax(wikiUrl, {dataType: 'jsonp', success: function( response ) {
+        var articleList = response[1]; for (var i = 0; i < articleList.length; i++) {
+            var articleStr = articleList[i];
+            var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+            $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+        }
+    }});
+
     return false;
 };
 
